@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sponsorsamarbete | Markus B Svedberg - Travtränare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #C71F26;
+            --dark: #1a1a1a;
+            --text: #2E2E2E;
+            --text-light: #666;
+            --white: #FFFFFF;
+            --off-white: #FAFAFA;
+            --light-gray: #F0F0F0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--dark);
+            overflow: hidden;
+        }
+
+        /* Deck Container */
+        .deck {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Slides */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+            background: var(--off-white);
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .slide.active .slide-content {
+            animation: fadeUp 0.5s ease-out;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-content {
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        /* Dark slides */
+        .slide-dark {
+            background: var(--dark);
+            color: var(--white);
+        }
+
+        /* Navigation */
+        .nav-arrows {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 0.5rem;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            width: 48px;
+            height: 48px;
+            border: 1.5px solid var(--text);
+            background: transparent;
+            color: var(--text);
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn:hover {
+            background: var(--text);
+            color: var(--white);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.2;
+            cursor: not-allowed;
+        }
+
+        .nav-btn.light {
+            border-color: rgba(255,255,255,0.5);
+            color: rgba(255,255,255,0.8);
+        }
+
+        .nav-btn.light:hover {
+            background: var(--white);
+            color: var(--dark);
+        }
+
+        /* Progress */
+        .progress {
+            position: fixed;
+            left: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            z-index: 100;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(46,46,46,0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot:hover {
+            background: rgba(46,46,46,0.4);
+        }
+
+        .dot.active {
+            background: var(--primary-red);
+            transform: scale(1.4);
+        }
+
+        .dot.light {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .dot.light:hover {
+            background: rgba(255,255,255,0.5);
+        }
+
+        .dot.light.active {
+            background: var(--white);
+        }
+
+        /* Slide counter */
+        .slide-counter {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-light);
+            z-index: 100;
+        }
+
+        .slide-counter.light {
+            color: rgba(255,255,255,0.5);
+        }
+
+
+        /* Typography */
+        .label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+        }
+
+        .slide-dark .label {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .title {
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .slide-dark .title {
+            color: var(--white);
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 1.8vw, 1.2rem);
+            font-weight: 400;
+            color: var(--text-light);
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        .slide-dark .subtitle {
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* ===================== */
+        /* SLIDE 1: HERO */
+        /* ===================== */
+        .slide-hero {
+            background: var(--dark);
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(199,31,38,0.1) 0%, transparent 50%);
+        }
+
+        .slide-hero .slide-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-year {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title span {
+            color: var(--primary-red);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 300;
+            color: rgba(255,255,255,0.7);
+            max-width: 550px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ===================== */
+        /* SLIDE 2: OM OSS */
+        /* ===================== */
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            aspect-ratio: 4/5;
+            background: var(--light-gray);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--light-gray) 0%, #e5e5e5 100%);
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .about-stats {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .stat {
+            text-align: left;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-red);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 0.25rem;
+        }
+
+        /* ===================== */
+        /* SLIDE 3: RÄCKVIDD */
+        /* ===================== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stats-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+        }
+
+        .stats-card .number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary-red);
+            line-height: 1;
+        }
+
+        .stats-card .label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text);
+            margin-top: 0.75rem;
+            margin-bottom: 0;
+            letter-spacing: 0;
+            text-transform: none;
+        }
+
+        .stats-card .sublabel {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 0.25rem;
+        }
+
+        /* ===================== */
+        /* SLIDE 4: EXPONERING */
+        /* ===================== */
+        .exposure-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .exposure-image {
+            aspect-ratio: 16/10;
+            background: var(--light-gray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .exposure-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .exposure-list {
+            list-style: none;
+        }
+
+        .exposure-list li {
+            padding: 0.9rem 0;
+            border-bottom: 1px solid var(--light-gray);
+            font-size: 1rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .exposure-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--primary-red);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ===================== */
+        /* SLIDE 5: HUVUDSPONSOR */
+        /* ===================== */
+        .package-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .package-header .price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1;
+        }
+
+        .package-header .price-suffix {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-light);
+        }
+
+        .package-header .note {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 0.75rem;
+        }
+
+        .package-badge {
+            display: inline-block;
+            background: var(--primary-red);
+            color: var(--white);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            padding: 0.4rem 0.8rem;
+            border-radius: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .package-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-group h4 {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+        }
+
+        .feature-group ul {
+            list-style: none;
+        }
+
+        .feature-group li {
+            font-size: 0.9rem;
+            color: var(--text);
+            padding: 0.4rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+        }
+
+        .feature-group li::before {
+            content: '✓';
+            color: var(--primary-red);
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        /* ===================== */
+        /* SLIDE 6: PARTNERSPONSOR */
+        /* ===================== */
+        .partner-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .partner-features {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+        }
+
+        .partner-features h4 {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--primary-red);
+            margin-bottom: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .partner-features h4:first-child {
+            margin-top: 0;
+        }
+
+        .partner-features ul {
+            list-style: none;
+        }
+
+        .partner-features li {
+            font-size: 0.95rem;
+            color: var(--text);
+            padding: 0.4rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+        }
+
+        .partner-features li::before {
+            content: '✓';
+            color: var(--primary-red);
+            font-weight: 600;
+        }
+
+        /* ===================== */
+        /* SLIDE 7: ANPASSNING */
+        /* ===================== */
+        .adapt-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .adapt-card {
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+        }
+
+        .adapt-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.75rem;
+        }
+
+        .adapt-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* ===================== */
+        /* SLIDE 8: KONTAKT */
+        /* ===================== */
+        .slide-kontakt {
+            text-align: center;
+        }
+
+        .contact-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            margin: 0 auto 2rem;
+            overflow: hidden;
+        }
+
+        .contact-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .contact-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-role {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 2rem;
+        }
+
+        .contact-link {
+            display: inline-block;
+            color: var(--white);
+            font-size: 1.1rem;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            padding-bottom: 0.25rem;
+            transition: border-color 0.3s;
+        }
+
+        .contact-link:hover {
+            border-color: var(--white);
+        }
+
+        .contact-cta {
+            display: inline-block;
+            margin-top: 2.5rem;
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .contact-cta:hover {
+            background: #a81a20;
+            transform: translateY(-2px);
+        }
+
+        /* ===================== */
+        /* RESPONSIVE */
+        /* ===================== */
+        @media (max-width: 900px) {
+            .slide {
+                padding: 4rem 2rem;
+            }
+
+            .about-layout,
+            .exposure-layout,
+            .package-layout,
+            .partner-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-image {
+                aspect-ratio: 16/9;
+                max-height: 250px;
+            }
+
+            .stats-grid,
+            .adapt-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .package-features {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .about-stats {
+                gap: 2rem;
+            }
+
+            .progress {
+                left: 1rem;
+            }
+
+            .nav-arrows {
+                right: 1rem;
+                bottom: 1rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .slide {
+                padding: 4rem 1.5rem 5rem;
+                justify-content: flex-start;
+                padding-top: 5rem;
+                overflow-y: auto;
+            }
+
+            .stats-grid,
+            .adapt-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .about-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .package-header .price {
+                font-size: 2.2rem;
+            }
+
+            .progress {
+                display: none;
+            }
+        }
+
+        /* Image placeholder styling */
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #e8e8e8 0%, #d8d8d8 100%);
+            color: #999;
+            font-size: 0.8rem;
+            text-align: center;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="deck">
+        <!-- Slide 1: Hero -->
+        <div class="slide slide-hero slide-dark active" data-slide="0">
+            <div class="slide-content">
+                <div class="hero-year">TRAVTRÄNARE · BODA GÅRD</div>
+                <h1 class="hero-title">Markus B<br><span>Svedberg</span></h1>
+                <p class="hero-subtitle">Sponsorsamarbete med en av Sveriges mest framgångsrika unga travtränare. Synlighet i TV4 och Kanal 12 varje vecka.</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Om oss -->
+        <div class="slide" data-slide="1">
+            <div class="slide-content">
+                <div class="about-layout">
+                    <div class="about-image">
+                        <img src="images/markus-portrait.png" alt="Markus B Svedberg">
+                    </div>
+                    <div class="about-text">
+                        <span class="label">Om Markus</span>
+                        <h2 class="title">Professionell travtränare med moderna värderingar</h2>
+                        <p>Markus B Svedberg driver Boda Gård utanför Strängnäs och räknas som en av Sveriges mest etablerade unga travtränare. Med fokus på kvalitet, hållbarhet och långsiktig utveckling har Team MBS byggt en modern verksamhet där arbetsmiljö och personalfilosofi är centrala.</p>
+                        <div class="about-stats">
+                            <div class="stat">
+                                <div class="stat-value">15:e</div>
+                                <div class="stat-label">Plats i Sverige 2025</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">14</div>
+                                <div class="stat-label">Anställda</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Räckvidd -->
+        <div class="slide" data-slide="2">
+            <div class="slide-content">
+                <span class="label">Travsportens räckvidd</span>
+                <h2 class="title">En av Sveriges största sporter</h2>
+                <p class="subtitle">Sverige är en av världens tre främsta travsportnationer. Med över en miljon besökare årligen och massiv TV-närvaro når sporten en bred och engagerad publik.</p>
+                <div class="stats-grid">
+                    <div class="stats-card">
+                        <div class="number">1M+</div>
+                        <div class="label">Besökare årligen</div>
+                        <div class="sublabel">på 33 travbanor</div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="number">13-15h</div>
+                        <div class="label">TV varje vecka</div>
+                        <div class="sublabel">V85 (TV4) · V86/GS75 (12an)</div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="number">1,5M</div>
+                        <div class="label">Tittare per månad</div>
+                        <div class="sublabel">ATG Live</div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="number">#3</div>
+                        <div class="label">Mest visade sport</div>
+                        <div class="sublabel">i svensk TV</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Målgrupp -->
+        <div class="slide" data-slide="3">
+            <div class="slide-content">
+                <span class="label">Målgruppen</span>
+                <h2 class="title">Engagerad och köpstark publik</h2>
+                <p class="subtitle">Travsporten attraherar en lojal målgrupp med hög köpkraft och starkt engagemang - perfekt för varumärkesbyggande.</p>
+                <div class="stats-grid">
+                    <div class="stats-card">
+                        <div class="number">35-65</div>
+                        <div class="label">Kärnmålgrupp</div>
+                        <div class="sublabel">med bred spridning</div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="number">Hög</div>
+                        <div class="label">Köpkraft</div>
+                        <div class="sublabel">beslutsfattare & företagare</div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="number">875</div>
+                        <div class="label">Tävlingsdagar</div>
+                        <div class="sublabel">per år i Sverige</div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="number">Lojal</div>
+                        <div class="label">Återkommande</div>
+                        <div class="sublabel">publik och följare</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Exponering -->
+        <div class="slide" data-slide="4">
+            <div class="slide-content">
+                <div class="exposure-layout">
+                    <div class="exposure-image">
+                        <img src="images/horse-lead.png" alt="Travhäst i träning på Boda Gård">
+                    </div>
+                    <div>
+                        <span class="label">Synlighet</span>
+                        <h2 class="title">Där ert varumärke syns</h2>
+                        <ul class="exposure-list">
+                            <li>TV-sändningar och livesändningar</li>
+                            <li>Tävlingsutrustning och sulky</li>
+                            <li>Hästar, personal och transport</li>
+                            <li>Boda Gård - anläggningen</li>
+                            <li>Digitala kanaler och sociala medier</li>
+                            <li>Press, media och kvällstidningar</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Värdet för sponsorn -->
+        <div class="slide" data-slide="5">
+            <div class="slide-content">
+                <span class="label">Värdet för er</span>
+                <h2 class="title">Därför sponsrar företag travsporten</h2>
+                <p class="subtitle">Ett sponsorskap med Markus B Svedberg ger er unika möjligheter att stärka ert varumärke och bygga relationer.</p>
+                <div class="adapt-grid">
+                    <div class="adapt-card">
+                        <h3>Varumärkesbyggande</h3>
+                        <p>Kontinuerlig exponering i TV, på plats och i digitala kanaler mot en engagerad och köpstark målgrupp.</p>
+                    </div>
+                    <div class="adapt-card">
+                        <h3>Kundrelationer</h3>
+                        <p>Unika möjligheter till kundaktiviteter och upplevelser på Boda Gård och vid tävlingar.</p>
+                    </div>
+                    <div class="adapt-card">
+                        <h3>Intern stolthet</h3>
+                        <p>Engagera era medarbetare genom studiebesök, teamaktiviteter och en gemensam hästupplevelse.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Huvudsponsor -->
+        <div class="slide" data-slide="6">
+            <div class="slide-content">
+                <div class="package-layout">
+                    <div class="package-header">
+                        <div class="package-badge">EXKLUSIVT</div>
+                        <span class="label">Sponsorpaket</span>
+                        <h2 class="title">Huvudsponsor</h2>
+                        <div class="price">500 000 <span class="price-suffix">kr/år</span></div>
+                        <div class="note">+ moms. Alternativ betalningsplan erbjuds.</div>
+                    </div>
+                    <div class="package-features">
+                        <div class="feature-group">
+                            <h4>Exponering</h4>
+                            <ul>
+                                <li>Logotyp i primär position</li>
+                                <li>Exponering på hästar, personal, transport</li>
+                                <li>Synlighet i TV och live</li>
+                                <li>Profilering på Boda Gård</li>
+                                <li>Alla digitala kanaler</li>
+                            </ul>
+                        </div>
+                        <div class="feature-group">
+                            <h4>PR & Kommunikation</h4>
+                            <ul>
+                                <li>Omnämnande i intervjuer och press</li>
+                                <li>Medverkan i pressmaterial</li>
+                                <li>Gemensamma kampanjer</li>
+                            </ul>
+                        </div>
+                        <div class="feature-group">
+                            <h4>Relation</h4>
+                            <ul>
+                                <li>Kund- och personalaktiviteter</li>
+                                <li>Studiebesök på Boda Gård</li>
+                                <li>Branschexklusivitet</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Partnersponsor -->
+        <div class="slide" data-slide="7">
+            <div class="slide-content">
+                <div class="partner-layout">
+                    <div>
+                        <span class="label">Sponsorpaket</span>
+                        <h2 class="title">Partnersponsor</h2>
+                        <div class="package-header">
+                            <div class="price">100 000 <span class="price-suffix">kr/år</span></div>
+                            <div class="note">+ moms. Två platser tillgängliga.</div>
+                        </div>
+                        <p style="margin-top: 2rem; color: var(--text-light); font-size: 1rem; line-height: 1.7;">
+                            Ett partnerskap som ger synlighet och tillgång till unika aktiveringsmöjligheter inom travsporten.
+                        </p>
+                    </div>
+                    <div class="partner-features">
+                        <h4>Exponering</h4>
+                        <ul>
+                            <li>Logotyp i sekundär position</li>
+                            <li>Synlighet vid tävlingar</li>
+                            <li>Exponering i digitala kanaler</li>
+                        </ul>
+                        <h4>Relation</h4>
+                        <ul>
+                            <li>Studiebesök på Boda Gård</li>
+                            <li>Utvalda aktiviteter</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Anpassning -->
+        <div class="slide" data-slide="8">
+            <div class="slide-content">
+                <span class="label">Anpassning</span>
+                <h2 class="title">Skräddarsytt efter era behov</h2>
+                <p class="subtitle">Samtliga samarbeten kan anpassas efter era specifika mål och önskemål.</p>
+                <div class="adapt-grid">
+                    <div class="adapt-card">
+                        <h3>Era mål</h3>
+                        <p>Vi anpassar samarbetet efter vad ni vill uppnå - varumärkesbyggande, kundrelationer eller intern motivation.</p>
+                    </div>
+                    <div class="adapt-card">
+                        <h3>Er bransch</h3>
+                        <p>Oavsett bransch hittar vi rätt exponeringsmöjligheter och aktiveringar som passar er verksamhet.</p>
+                    </div>
+                    <div class="adapt-card">
+                        <h3>Aktivering</h3>
+                        <p>Från studiebesök och kundträffar till gemensamma marknadsföringskampanjer.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Kontakt -->
+        <div class="slide slide-dark slide-kontakt" data-slide="9">
+            <div class="slide-content">
+                <div class="contact-image">
+                    <img src="images/markus-portrait.png" alt="Markus B Svedberg">
+                </div>
+                <span class="label" style="color: rgba(255,255,255,0.4);">Nästa steg</span>
+                <h2 class="title" style="color: var(--white);">Låt oss prata</h2>
+                <div class="contact-name">Markus B Svedberg</div>
+                <div class="contact-role">Boda Gård, Strängnäs</div>
+                <a href="https://www.mbsvedberg.com" class="contact-link" target="_blank">mbsvedberg.com</a>
+                <br>
+                <a href="mailto:kontakt@mbsvedberg.com" class="contact-cta">Ta kontakt</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="progress" id="progress"></div>
+
+    <div class="nav-arrows">
+        <button class="nav-btn" id="prevBtn" aria-label="Föregående">&#8592;</button>
+        <button class="nav-btn" id="nextBtn" aria-label="Nästa">&#8594;</button>
+    </div>
+
+    <div class="slide-counter" id="slideCounter">1 / 10</div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        let currentSlide = 0;
+
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progress = document.getElementById('progress');
+        const slideCounter = document.getElementById('slideCounter');
+
+        // Create progress dots
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'dot' + (i === 0 ? ' active' : '');
+            dot.addEventListener('click', () => goToSlide(i));
+            progress.appendChild(dot);
+        }
+
+        const dots = document.querySelectorAll('.dot');
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+
+            slideCounter.textContent = `${currentSlide + 1} / ${totalSlides}`;
+
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+
+            // Check if current slide is dark
+            const isDark = slides[currentSlide].classList.contains('slide-dark');
+
+            // Update navigation colors
+            prevBtn.classList.toggle('light', isDark);
+            nextBtn.classList.toggle('light', isDark);
+            slideCounter.classList.toggle('light', isDark);
+
+            dots.forEach(dot => {
+                dot.classList.toggle('light', isDark);
+            });
+        }
+
+        function goToSlide(index) {
+            currentSlide = Math.max(0, Math.min(totalSlides - 1, index));
+            updateSlide();
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        // Event listeners
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Touch/swipe support
+        let touchStartX = 0;
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+            const diff = touchStartX - e.changedTouches[0].screenX;
+            if (Math.abs(diff) > 50) {
+                diff > 0 ? nextSlide() : prevSlide();
+            }
+        }, { passive: true });
+
+        // Initialize
+        updateSlide();
+    </script>
+</body>
+</html>
