@@ -637,6 +637,18 @@
             border-color: var(--white);
         }
 
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .contact-details .contact-link {
+            font-size: 1.1rem;
+        }
+
         .contact-cta {
             display: inline-block;
             margin-top: 2.5rem;
@@ -996,9 +1008,11 @@
                 <h2 class="title" style="color: var(--white);">Låt oss prata</h2>
                 <div class="contact-name">Markus B Svedberg</div>
                 <div class="contact-role">Boda Gård, Strängnäs</div>
-                <a href="https://www.mbsvedberg.com" class="contact-link" target="_blank">mbsvedberg.com</a>
-                <br>
-                <a href="mailto:kontakt@mbsvedberg.com" class="contact-cta">Ta kontakt</a>
+                <div class="contact-details">
+                    <a href="mailto:markus_svedberg@msn.com" class="contact-link">markus_svedberg@msn.com</a>
+                    <a href="tel:+46733102999" class="contact-link">073-310 29 99</a>
+                    <a href="https://www.mbsvedberg.com" class="contact-link" target="_blank">mbsvedberg.com</a>
+                </div>
             </div>
         </div>
     </div>
